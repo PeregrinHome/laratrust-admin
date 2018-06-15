@@ -17,5 +17,12 @@
             "LaratrustAdmin\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaratrustAdmin\\LaratrustAdminServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "stable"
 }
