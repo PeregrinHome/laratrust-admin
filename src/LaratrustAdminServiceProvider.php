@@ -9,7 +9,7 @@ class ModulesServiceProvider extends ServiceProvider
     public function boot()
     {
 
-
+//--
 
         //регистрируем конфиг
 //        $this->mergeConfigFrom(__DIR__ . '/config/module.php', 'module');
