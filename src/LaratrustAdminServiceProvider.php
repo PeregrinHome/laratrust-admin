@@ -4,7 +4,7 @@ namespace LaratrustAdmin;
 
 use Illuminate\Support\ServiceProvider;
 
-class ModulesServiceProvider extends ServiceProvider
+class LaratrustAdminServiceProvider extends ServiceProvider
 {
     public function boot()
     {
