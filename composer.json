@@ -21,7 +21,10 @@
         "laravel": {
             "providers": [
                 "LaratrustAdmin\\LaratrustAdminServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "LaratrustAdmin": "LaratrustAdmin\\LaratrustAdminFacade"
+            }
         }
     },
     "minimum-stability": "stable"
