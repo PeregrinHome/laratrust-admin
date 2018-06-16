@@ -95,7 +95,10 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             File::delete([
                 base_path('app/Permission.php'),
                 base_path('app/Role.php'),
-                base_path('app/User.php')
+                base_path('app/Role.php'),
+                base_path('resources/views/layouts/app.blade.php'),
+                base_path('resources/views/home.blade.php'),
+                base_path('resources/views/welcome.blade.php'),
             ]);
         });
         Artisan::command('ladmin:install', function () {
