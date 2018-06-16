@@ -23,9 +23,7 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             __DIR__.'/resources/assets' => base_path('resources/assets/vendor/LaratrustAdmin'),
         ], 'LaratrustAdminAll');
 
-        if(file_exists(__DIR__.'/routes/web.php')) {
-            $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-        }
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
     }
 
     public function register()
