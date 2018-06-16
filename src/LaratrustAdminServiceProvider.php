@@ -61,6 +61,7 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             $cmd .= ' && php artisan ladmin:publish:laratrust';
             $cmd .= ' && php artisan ladmin:files:delete';
             $cmd .= ' && php artisan ladmin:publish:admin';
+            $cmd .= ' && php artisan ladmin:migration';
             $cmd .= ' && php artisan ladmin:publish:temp';
             $cmd .= ' && composer dump-autoload';
             system($cmd);
