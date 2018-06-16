@@ -25,7 +25,6 @@ class LaratrustAdminServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/Vendor/config' => base_path('laratrustAdminTemp/config'),
-            __DIR__.'/Vendor/database' => base_path('laratrustAdminTemp/database'),
         ], 'LaratrustAdminTempSetting');
 
         $this->publishes([
@@ -77,6 +76,16 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             $this->info("LaratrustAdmin Auth");
             $cmd = 'php artisan make:auth';
             system($cmd);
+        });
+        Artisan::command('ladmin:migration', function () {
+            $this->info("LaratrustAdmin Migration");
+            $file = File::glob(base_path('database/migrations/*create_users_table.php'));
+            if(!empty($file)){
+                File::delete($file[0]);
+            }
+            $date = date('Y_m_d_His');
+            $migration_path = database_path("migrations/${date}_create_users_table.php");
+            File::copy(__DIR__.'/Sources/migrations/create_users_table.php', $migration_path);
         });
         Artisan::command('ladmin:files:delete', function () {
             $this->info("LaratrustAdmin Delete Files");
