@@ -2,10 +2,10 @@
     "name": "cvaize/laratrust-admin",
     "type": "library",
     "require": {
-        "php": ">=7.0.0",
-        "santigarcor/laratrust": "^5.0"
+        "php": ">=7.0.0"
     },
     "license": "MIT",
+    "version": "dev-master",
     "authors": [
         {
             "name": "cvaize",
