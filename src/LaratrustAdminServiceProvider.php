@@ -25,6 +25,7 @@ class LaratrustAdminServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/Vendor/config' => base_path('laratrustAdminTemp/config'),
+            __DIR__.'/Sources/webpack.mix.js' => base_path('laratrustAdminTemp/sources/webpack.mix.js'),
         ], 'LaratrustAdminTempSetting');
 
         $this->publishes([
