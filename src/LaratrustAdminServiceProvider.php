@@ -3,6 +3,7 @@
 namespace LaratrustAdmin;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Artisan;
 
 class LaratrustAdminServiceProvider extends ServiceProvider
 {
