@@ -8,22 +8,32 @@ class LaratrustAdminServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'LaratrustAdmin');
-
-        $this->publishes([
-            __DIR__.'/resources/views' => base_path('resources/views/vendor/LaratrustAdmin'),
-        ], 'LaratrustAdminViews');
-
-        $this->publishes([
-            __DIR__.'/resources/assets' => base_path('resources/assets/vendor/LaratrustAdmin'),
-        ], 'LaratrustAdminAssets');
 
         $this->publishes([
             __DIR__.'/resources/views' => base_path('resources/views/vendor/LaratrustAdmin'),
             __DIR__.'/resources/assets' => base_path('resources/assets/vendor/LaratrustAdmin'),
+        ], 'LaratrustAdminResources');
+
+        $this->publishes([
+            __DIR__.'/routes' => base_path('routes/vendor/LaratrustAdmin'),
+        ], 'LaratrustAdminRoutes');
+
+        $this->publishes([
+            __DIR__.'/database' => base_path('database/vendor/LaratrustAdmin'),
+        ], 'LaratrustAdminDatabase');
+
+        $this->publishes([
+            __DIR__.'/app' => base_path('app/vendor/LaratrustAdmin'),
+        ], 'LaratrustAdminApp');
+
+        $this->publishes([
+            __DIR__.'/resources/views' => base_path('resources/views/vendor/LaratrustAdmin'),
+            __DIR__.'/resources/assets' => base_path('resources/assets/vendor/LaratrustAdmin'),
+            __DIR__.'/routes' => base_path('routes/vendor/LaratrustAdmin'),
+            __DIR__.'/database' => base_path('database/vendor/LaratrustAdmin'),
+            __DIR__.'/app' => base_path('app/vendor/LaratrustAdmin'),
         ], 'LaratrustAdminAll');
 
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
     }
 
     public function register()
