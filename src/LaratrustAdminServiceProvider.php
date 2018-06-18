@@ -2,6 +2,7 @@
 
 namespace LaratrustAdmin;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
@@ -24,9 +25,13 @@ class LaratrustAdminServiceProvider extends ServiceProvider
         ], 'LaratrustAdminTemp');
 
         $this->publishes([
-            __DIR__.'/Vendor/config' => base_path('laratrustAdminTemp/config'),
             __DIR__.'/Sources/webpack.mix.js' => base_path('laratrustAdminTemp/sources/webpack.mix.js'),
         ], 'LaratrustAdminTempSetting');
+
+        $this->publishes([
+            __DIR__.'/Vendor/config/auth.php' => base_path('laratrustAdminTemp/config/auth.php'),
+            __DIR__.'/Vendor/config/laratrust.php' => base_path('laratrustAdminTemp/config/laratrust.php'),
+        ], 'LaratrustAdminTempConfig');
 
         $this->publishes([
             __DIR__.'/Vendor/config' => base_path('laratrustAdminTemp/config'),
@@ -61,9 +66,10 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             $cmd .= ' && php artisan ladmin:install';
             $cmd .= ' && php artisan ladmin:publish:laratrust';
             $cmd .= ' && php artisan ladmin:files:delete';
+            $cmd .= ' && php artisan ladmin:publish:config';
             $cmd .= ' && php artisan ladmin:publish:admin';
             $cmd .= ' && php artisan ladmin:migration';
-            $cmd .= ' && php artisan ladmin:publish:temp';
+            $cmd .= ' && php artisan ladmin:settings:set';
             $cmd .= ' && composer dump-autoload';
             system($cmd);
         });
@@ -100,12 +106,13 @@ class LaratrustAdminServiceProvider extends ServiceProvider
                 base_path('resources/views/layouts/app.blade.php'),
                 base_path('resources/views/home.blade.php'),
                 base_path('resources/views/welcome.blade.php'),
+                base_path('config/auth.php'),
+                base_path('config/laratrust.php'),
             ]);
         });
         Artisan::command('ladmin:install', function () {
             $this->info("LaratrustAdmin Install");
-            $cmd = 'composer require "santigarcor/laratrust:5.0.*"';
-            $cmd .= ' && composer require "laravelcollective/html":"^5.4.0"';
+            $cmd = 'composer require "santigarcor/laratrust:5.0.*" "laravelcollective/html:^5.4.0"';
             system($cmd);
         });
         Artisan::command('ladmin:publish:laratrust', function () {
@@ -125,6 +132,11 @@ class LaratrustAdminServiceProvider extends ServiceProvider
         Artisan::command('ladmin:publish:temp', function () {
             $this->info("LaratrustAdmin publish Temp");
             $cmd = 'php artisan vendor:publish --tag="LaratrustAdminTempSetting"';
+            system($cmd);
+        });
+        Artisan::command('ladmin:publish:config', function () {
+            $this->info("LaratrustAdmin publish Config");
+            $cmd = 'php artisan vendor:publish --tag="LaratrustAdminTempConfig"';
             system($cmd);
         });
     }
