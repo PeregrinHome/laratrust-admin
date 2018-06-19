@@ -25,8 +25,8 @@ class LaratrustAdminServiceProvider extends ServiceProvider
         ], 'LaratrustAdminTemp');
 
         $this->publishes([
-            __DIR__.'/Sources/webpack.mix.js' => base_path('laratrustAdminTemp/sources/webpack.mix.js'),
-        ], 'LaratrustAdminTempSetting');
+            __DIR__.'/Sources/webpack.mix.js' => base_path('webpack.mix.js'),
+        ], 'LaratrustAdminFront');
 
         $this->publishes([
             __DIR__.'/Vendor/config/auth.php' => base_path('config/auth.php'),
@@ -68,7 +68,7 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             $cmd .= ' && php artisan ladmin:publish:laratrust';
             $cmd .= ' && php artisan ladmin:files:delete';
             $cmd .= ' && php artisan ladmin:publish:config';
-            $cmd .= ' && php artisan ladmin:publish:temp';
+            $cmd .= ' && php artisan ladmin:publish:front';
             $cmd .= ' && php artisan ladmin:publish:admin';
             $cmd .= ' && php artisan ladmin:migration';
             $cmd .= ' && composer dump-autoload';
@@ -109,6 +109,7 @@ class LaratrustAdminServiceProvider extends ServiceProvider
                 base_path('resources/views/welcome.blade.php'),
                 base_path('config/auth.php'),
                 base_path('config/laratrust.php'),
+                base_path('webpack.mix.js'),
             ]);
         });
         Artisan::command('ladmin:install', function () {
@@ -130,14 +131,15 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             $cmd .= ' && php artisan vendor:publish --tag="LaratrustAdminReplaceModels"';
             system($cmd);
         });
-        Artisan::command('ladmin:publish:temp', function () {
-            $this->info("LaratrustAdmin publish Temp");
-            $cmd = 'php artisan vendor:publish --tag="LaratrustAdminTempSetting"';
-            system($cmd);
-        });
         Artisan::command('ladmin:publish:config', function () {
             $this->info("LaratrustAdmin publish Config");
             $cmd = 'php artisan vendor:publish --tag="LaratrustAdminTempConfig"';
+            system($cmd);
+        });
+        Artisan::command('ladmin:publish:front', function () {
+            $this->info("LaratrustAdmin publish Front");
+            $cmd = 'php artisan vendor:publish --tag="LaratrustAdminFront"';
+            $cmd .= ' && npm i && npm i jquery-mask-plugin';
             system($cmd);
         });
     }
