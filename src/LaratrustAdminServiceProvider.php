@@ -59,6 +59,7 @@ class LaratrustAdminServiceProvider extends ServiceProvider
 
     public function register()
     {
+
         Artisan::command('ladmin:init', function () {
             $this->info("LaratrustAdmin Initialization");
             $cmd = 'php artisan make:auth';
