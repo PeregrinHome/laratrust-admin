@@ -29,8 +29,8 @@ class LaratrustAdminServiceProvider extends ServiceProvider
         ], 'LaratrustAdminTempSetting');
 
         $this->publishes([
-            __DIR__.'/Vendor/config/auth.php' => base_path('laratrustAdminTemp/config/auth.php'),
-            __DIR__.'/Vendor/config/laratrust.php' => base_path('laratrustAdminTemp/config/laratrust.php'),
+            __DIR__.'/Vendor/config/auth.php' => base_path('config/auth.php'),
+            __DIR__.'/Vendor/config/laratrust.php' => base_path('config/laratrust.php'),
         ], 'LaratrustAdminTempConfig');
 
         $this->publishes([
@@ -68,6 +68,7 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             $cmd .= ' && php artisan ladmin:publish:laratrust';
             $cmd .= ' && php artisan ladmin:files:delete';
             $cmd .= ' && php artisan ladmin:publish:config';
+            $cmd .= ' && php artisan ladmin:publish:temp';
             $cmd .= ' && php artisan ladmin:publish:admin';
             $cmd .= ' && php artisan ladmin:migration';
             $cmd .= ' && composer dump-autoload';
