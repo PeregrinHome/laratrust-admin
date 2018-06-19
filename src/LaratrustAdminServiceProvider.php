@@ -69,7 +69,6 @@ class LaratrustAdminServiceProvider extends ServiceProvider
             $cmd .= ' && php artisan ladmin:publish:config';
             $cmd .= ' && php artisan ladmin:publish:admin';
             $cmd .= ' && php artisan ladmin:migration';
-            $cmd .= ' && php artisan ladmin:settings:set';
             $cmd .= ' && composer dump-autoload';
             system($cmd);
         });
